@@ -26,7 +26,7 @@ function* submitWizard(action) {
       case 'zip':
         result = yield call(creatorApi.zip, {
           name: projectile.name,
-          runtime: projectile.runtime,
+          shared: { runtime: projectile.runtime },
           capabilities: (projectile.capabilities || []).map(c => ({ module: c.module })),
         }, { authorizationToken });
         yield put(launchActions.launchProjectileSuccess(result));
@@ -34,7 +34,7 @@ function* submitWizard(action) {
       case 'launch':
         result = yield call(creatorApi.launch, {
           name: projectile.name,
-          runtime: projectile.runtime,
+          shared: { runtime: projectile.runtime },
           capabilities: (projectile.capabilities || []).map(c => ({ module: c.module })),
           clusterId: projectile.clusterId,
           projectName: projectile.projectName,
