@@ -85,6 +85,10 @@
   "jest": {
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
-    ]
+    ],
+    "moduleNameMapper": {
+      "@app/(.*)": "<rootDir>/src/app/$1",
+      "@shared/(.*)": "<rootDir>/src/shared/$1"
+    }
   }
 }
