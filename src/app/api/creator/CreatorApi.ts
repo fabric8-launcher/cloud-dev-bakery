@@ -1,7 +1,7 @@
 export interface ZipPayload {
   name: string;
   shared: {
-    runtime: string;
+    runtime: { name: string, version: string };
   };
   capabilities: Array<{ module: string; }>;
 }
@@ -13,7 +13,7 @@ export interface ZipOutput {
 export interface LaunchPayload {
   name: string;
   shared: {
-    runtime: string;
+    runtime: { name: string, version: string };
   };
   capabilities: Array<{ module: string; }>;
   clusterId: string;

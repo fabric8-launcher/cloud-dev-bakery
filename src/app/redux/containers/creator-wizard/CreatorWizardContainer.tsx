@@ -67,7 +67,7 @@ function buildProjectile(stepState: Step[]): Projectile {
   const byId = _.keyBy(stepState, 'id');
   return {
     name: _.get(byId[wizardStepsDefinition.nameStep.id], 'context.name'),
-    runtime: _.get(byId[wizardStepsDefinition.runtimeStep.id], 'context.runtime.id'),
+    runtime: {name:_.get(byId[wizardStepsDefinition.runtimeStep.id], 'context.runtime.id'), version: 'community'},
     capabilities: Array.from(_.get(byId[wizardStepsDefinition.capabilityStep.id], 'context.capabilities', [])),
     clusterId: _.get(byId[wizardStepsDefinition.deploymentStep.id], 'context.cluster.id'),
     projectName: _.get(byId[wizardStepsDefinition.nameStep.id], 'context.name'),

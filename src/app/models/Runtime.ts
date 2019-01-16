@@ -4,4 +4,5 @@ export default interface Runtime {
   name: string;
   description?: string;
   icon?: string;
+  version: string;
 }

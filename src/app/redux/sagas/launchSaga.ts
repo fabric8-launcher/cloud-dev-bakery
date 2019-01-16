@@ -34,7 +34,7 @@ function* submitWizard(action) {
       case 'launch':
         result = yield call(creatorApi.launch, {
           name: projectile.name,
-          shared: { runtime: projectile.runtime },
+          shared: { runtime: projectile.runtime! },
           capabilities: (projectile.capabilities || []).map(c => ({ module: c.module })),
           clusterId: projectile.clusterId,
           projectName: projectile.projectName,

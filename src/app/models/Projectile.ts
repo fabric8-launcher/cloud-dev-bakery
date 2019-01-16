@@ -1,6 +1,6 @@
 export interface Projectile {
   name?: string;
-  runtime?: string;
+  runtime?: { name: string, version: string };
   capabilities?: Array<{ module: string; }>;
   clusterId?: string;
   projectName?: string;

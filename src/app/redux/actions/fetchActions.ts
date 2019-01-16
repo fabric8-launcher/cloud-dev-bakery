@@ -9,7 +9,7 @@ export enum FetchActions {
 
 export const fetchActions = {
   fetchCapabilities: () => action(FetchActions.FETCH_CAPABILITIES, {request: {url: `/capabilities`}}),
-  fetchRuntimes: () => action(FetchActions.FETCH_RUNTIMES, {request: {url: `/enums/runtime`}}),
+  fetchRuntimes: () => action(FetchActions.FETCH_RUNTIMES, {request: {url: `/enums/runtime.name`}}),
   fetchClusters: () => action(FetchActions.FETCH_CLUSTERS, {
     request: {url: `/services/openshift/clusters`, headers: {'X-App': 'launcher'}},
     meta: {driver: 'launcher'},
