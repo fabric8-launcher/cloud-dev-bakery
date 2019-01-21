@@ -1,4 +1,4 @@
-import IdAndName from '@app/models/IdAndName';
+import IdAndName from '@/app/models/IdAndName';
 
 export default interface Capability {
   module: string;

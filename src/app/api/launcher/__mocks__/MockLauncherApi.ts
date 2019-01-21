@@ -1,6 +1,5 @@
 import { LauncherApi, StatusListener } from '../LauncherApi';
 
-
 const progressDef = {
   success: [
     {
@@ -42,4 +41,3 @@ export default class MockLauncherApi implements LauncherApi {
   };
 
 }
-

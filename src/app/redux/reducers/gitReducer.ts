@@ -2,7 +2,7 @@ import { requestsReducer } from 'redux-saga-requests';
 import { AppState } from '../states';
 import { createSelector } from 'reselect';
 import GitUser from '../../models/GitUser';
-import { FetchedData } from '../../models/FetchedData';
+import { FetchedData } from '@/app/models/FetchedData';
 import { FetchActions } from '../actions/fetchActions';
 
 // Reducer
@@ -11,7 +11,7 @@ export const gitUserReducer = requestsReducer({ actionType: FetchActions.FETCH_G
 
 // Selectors
 
-const getGitUserState = (state:AppState) => state.gitUser;
+const getGitUserState = (state: AppState) => state.gitUser;
 
 export const getGitUserData = createSelector([getGitUserState], (f) => ({
   data: f.data,

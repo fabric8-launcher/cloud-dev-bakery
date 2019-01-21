@@ -1,8 +1,8 @@
-import NameStep from '@app/components/wizard/steps/NameStep';
+import NameStep from '@/app/components/wizard/steps/NameStep';
 import { connect } from 'react-redux';
 import { AppState } from '../../../states';
 
-const mapStateToRuntimeStepProps = (state:AppState, props) => ({});
+const mapStateToRuntimeStepProps = (state: AppState, props) => ({});
 
 const mapDispatchToProps = (dispatch) => ({});
 

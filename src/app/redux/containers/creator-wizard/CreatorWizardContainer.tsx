@@ -8,16 +8,15 @@ import CapabilitiesStepContainer from './steps/CapabilitiesStepContainer';
 import DeploymentStepContainer from './steps/DeploymentStepContainer';
 import RepositoryStepContainer from './steps/RepositoryStepContainer';
 
-import NextStepsZip from '@app/components/wizard/next-steps/NextStepsZip';
-import NextStepsOpenShift from '@app/components/wizard/next-steps/NextStepsOpenShift';
-import ProcessingApp from '@app/components/wizard/next-steps/ProcessingApp';
-import { Projectile } from '@app/models/Projectile';
+import NextStepsZip from '@/app/components/wizard/next-steps/NextStepsZip';
+import NextStepsOpenShift from '@/app/components/wizard/next-steps/NextStepsOpenShift';
+import ProcessingApp from '@/app/components/wizard/next-steps/ProcessingApp';
+import { Projectile } from '@/app/models/Projectile';
 import * as _ from 'lodash';
 import { getLaunchState } from '../../reducers/launchReducer';
 import { launchActions } from '../../actions/launchActions';
-import { SmartWizard, Step } from '@shared/smart-components/smart-wizard/SmartWizard';
-import { smartWizardActions } from '@shared/smart-components/smart-wizard/smartWizardActions';
-
+import { SmartWizard, Step } from '@/shared/smart-components/smart-wizard/SmartWizard';
+import { smartWizardActions } from '@/shared/smart-components/smart-wizard/smartWizardActions';
 
 const wizardStepsDefinition = {
   nameStep: {
@@ -43,7 +42,6 @@ const wizardStepsDefinition = {
 };
 
 interface CreatorWizardProps {
-  data: any;
   submission: {
     payload?: any;
     loading: boolean;
@@ -53,8 +51,6 @@ interface CreatorWizardProps {
     error?: string;
     result?: any;
   };
-
-  saveWizard(payload): void;
 
   launchProjectile(payload): void;
 
@@ -67,7 +63,7 @@ function buildProjectile(stepState: Step[]): Projectile {
   const byId = _.keyBy(stepState, 'id');
   return {
     name: _.get(byId[wizardStepsDefinition.nameStep.id], 'context.name'),
-    runtime: {name:_.get(byId[wizardStepsDefinition.runtimeStep.id], 'context.runtime.id'), version: 'community'},
+    runtime: {name: _.get(byId[wizardStepsDefinition.runtimeStep.id], 'context.runtime.id'), version: 'community'},
     capabilities: Array.from(_.get(byId[wizardStepsDefinition.capabilityStep.id], 'context.capabilities', [])),
     clusterId: _.get(byId[wizardStepsDefinition.deploymentStep.id], 'context.cluster.id'),
     projectName: _.get(byId[wizardStepsDefinition.nameStep.id], 'context.name'),
@@ -92,9 +88,11 @@ class CreatorWizard extends Component<CreatorWizardProps> {
           submit={this.props.launchProjectile}
           buildProjectile={buildProjectile}
         />
-        <ProcessingApp isOpen={this.props.submission.loading}
-                       progressEvents={this.props.submission.progressEvents}
-                       progressEventsResults={this.props.submission.progressEventsResults}/>
+        <ProcessingApp
+          isOpen={this.props.submission.loading}
+          progressEvents={this.props.submission.progressEvents}
+          progressEventsResults={this.props.submission.progressEventsResults}
+        />
         <NextStepsZip
           isOpen={this.props.submission.completed && this.props.submission.payload.target === 'zip'}
           error={Boolean(this.props.submission.error)}

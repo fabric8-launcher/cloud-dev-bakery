@@ -2,8 +2,7 @@ import { call, put, takeEvery, throttle } from 'redux-saga/effects';
 
 import { AuthenticationAction, authenticationAction } from '../actions/authenticationActions';
 import { newKeycloakAuthenticationApi } from '../../api';
-import { OptionalUser } from '../../api/authentication/AuthenticationApi';
-
+import { OptionalUser } from '@/app/api/authentication/AuthenticationApi';
 
 const authenticationApi = newKeycloakAuthenticationApi();
 
@@ -60,7 +59,7 @@ function* logoutRequest(action) {
 }
 
 export default function* authenticationSaga() {
-  if(!authenticationApi.enabled) {
+  if (!authenticationApi.enabled) {
     yield put(authenticationAction.disable(authenticationApi.user!.token));
     return;
   }

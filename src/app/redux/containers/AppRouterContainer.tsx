@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { AppState } from '../states';
 
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import LoginPageContainer from '@app/redux/containers/pages/LoginPageContainer';
-import WizardPageContainer from '@app/redux/containers/pages/WizardPageContainer';
-import HomePageContainer from '@app/redux/containers/pages/HomePageContainer';
+import LoginPageContainer from '@/app/redux/containers/pages/LoginPageContainer';
+import WizardPageContainer from '@/app/redux/containers/pages/WizardPageContainer';
+import HomePageContainer from '@/app/redux/containers/pages/HomePageContainer';
 
-class AppRouterProps {
-  public readonly authenticated: boolean;
+interface AppRouterProps {
+  authenticated: boolean;
 }
 
 const AppRouter = ({authenticated}: AppRouterProps) => {
@@ -39,16 +39,16 @@ const AppRouter = ({authenticated}: AppRouterProps) => {
   );
 };
 
-
 const mapStateToProps = (state: AppState) => ({
   authenticated: state.authentication.authenticated,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = () => ({});
 
 const AppRouterContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
+// @ts-ignore
 )(AppRouter);
 
 export default AppRouterContainer;

@@ -54,7 +54,7 @@ const authenticationReducer = (state: AuthenticationState = INITIAL_STATE, actio
   }
 };
 
-export const getAuthenticationState = (state:AppState) => state.authentication;
+export const getAuthenticationState = (state: AppState) => state.authentication;
 
 export const getToken = createSelector([getAuthenticationState], a => a.token);
 

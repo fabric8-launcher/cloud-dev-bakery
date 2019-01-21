@@ -3,9 +3,9 @@ import { Card, CardBody, CardFooter, CardHeader } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 import './HomePageContainer.css';
 import { CaretRightIcon } from '@patternfly/react-icons';
-import MainLayoutContainer from '@app/redux/containers/MainLayoutContainer';
+import MainLayoutContainer from '@/app/redux/containers/MainLayoutContainer';
 
-const HomePageContainer: React.SFC = () => (
+const HomePageContainer: React.FunctionComponent = () => (
   <MainLayoutContainer>
     <section id="intro">
       <div className="container">
@@ -85,6 +85,5 @@ const HomePageContainer: React.SFC = () => (
     </section>
   </MainLayoutContainer>
 );
-
 
 export default HomePageContainer;

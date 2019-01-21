@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Component } from 'react';
-import Wizard from '@shared/components/wizard';
+import Wizard from '@/shared/components/wizard';
 
-import { StepProps } from '@shared/smart-components/smart-wizard/StepProps';
-import SectionLoader from '@shared/components/loader/SectionLoader';
-import { GitRepository } from '@app/models/GitRepository';
-import GitUser from '@app/models/GitUser';
-import { FetchedData } from '@app/models/FetchedData';
+import { StepProps } from '@/shared/smart-components/smart-wizard/StepProps';
+import SectionLoader from '@/shared/components/loader/SectionLoader';
+import { GitRepository } from '@/app/models/GitRepository';
+import GitUser from '@/app/models/GitUser';
+import { FetchedData } from '@/app/models/FetchedData';
 import { Select, SelectOption, TextInput } from '@patternfly/react-core';
 import { AuthorizationWarning } from '../../AuthorizationWarning';
 
@@ -29,6 +29,7 @@ export interface RepositoryStepProps extends StepProps<RepositoryStepContext> {
     authenticationEnabled: boolean;
     openAccountManagement(): void;
   };
+
   fetchGitUser(): void;
 }
 
@@ -37,7 +38,6 @@ export interface BaseGitRepository {
   owner: string;
   name: string;
 }
-
 
 function withGitHubUrl(repo: BaseGitRepository): GitRepository {
   return {
@@ -82,9 +82,10 @@ class RepositoryStep extends Component<RepositoryStepProps> {
       >
         <SectionLoader loading={gitUserData.loading} error={!isGitNotAuthorized && gitUserData.error} reload={this.props.fetchGitUser}>
           {isGitNotAuthorized && (
-            <AuthorizationWarning {...this.props.authentication}
-                                  name="repository access"
-                                  retry={this.props.fetchGitUser}
+            <AuthorizationWarning
+              {...this.props.authentication}
+              name="repository access"
+              retry={this.props.fetchGitUser}
             />
           )}
           {!isGitNotAuthorized && gitUserData.data && (

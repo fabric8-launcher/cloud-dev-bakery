@@ -13,7 +13,7 @@ export interface StepDefinition {
 }
 
 export interface WizardDefinition {
-  [id: string]:StepDefinition;
+  [id: string]: StepDefinition;
 }
 
 export interface Step {
@@ -31,23 +31,26 @@ export interface WizardData {
 interface SmartWizardComponentProps {
   definition: WizardDefinition;
   data?: WizardData;
+
   buildProjectile(steps: Step[]): any;
+
   save(payload): void;
+
   submit(payload): void;
+
   reset(): void;
 }
 
-
 class SmartWizardComponent extends Component<SmartWizardComponentProps> {
-  private wizardData:WizardData;
+  private wizardData: WizardData;
 
   constructor(props) {
     super(props);
-    this.computeWizardDataFromProps();
+    this.wizardData = this.computeWizardDataFromProps();
   }
 
   public render() {
-    this.computeWizardDataFromProps();
+    this.wizardData = this.computeWizardDataFromProps();
     return (
       <React.Fragment>
         <Wizard>
@@ -64,7 +67,7 @@ class SmartWizardComponent extends Component<SmartWizardComponentProps> {
     if (steps.length === 0) {
       throw new Error('Invalid step definition');
     }
-    this.wizardData = {
+    return {
       steps,
       current: (this.props.data && this.props.data.current) || steps[0].id,
       projectile: (this.props.data && this.props.data.projectile) || {},
@@ -115,10 +118,10 @@ class SmartWizardComponent extends Component<SmartWizardComponentProps> {
   }
 
   private selectStep = (id: string) => {
-    this.props.save({ ...this.wizardData, current: id });
-  }
+    this.props.save({...this.wizardData, current: id});
+  };
 
-  private updateStepContext = (id: string, payload: {context: any; completed: boolean}) => {
+  private updateStepContext = (id: string, payload: { context: any; completed: boolean }) => {
     const index = this.wizardData.steps.findIndex(s => s.id === id);
     if (index < 0) {
       return;
@@ -130,19 +133,19 @@ class SmartWizardComponent extends Component<SmartWizardComponentProps> {
       completed: payload.completed,
       context: payload.context,
     };
-    this.props.save({ ...this.props.data, steps: newArray, projectile: this.props.buildProjectile(newArray) });
-  }
+    this.props.save({...this.props.data, steps: newArray, projectile: this.props.buildProjectile(newArray)});
+  };
 
   private submitStep = (id: string, name?: string) => {
     if (typeof name === 'string') {
-      this.props.submit({ target: name, projectile: this.wizardData.projectile });
+      this.props.submit({target: name, projectile: this.wizardData.projectile});
       return;
     }
     const nextStep = findNextStep(this.getStepIds(), id);
     if (nextStep) {
       this.selectStep(nextStep);
     }
-  }
+  };
 }
 
 const mapStateToProps = (state: { smartWizard: SmartWizardState }) => ({
@@ -158,4 +161,3 @@ export const SmartWizard = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(SmartWizardComponent);
-

@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-import * as Patternfly from 'patternfly-react';
+import { DataList, DataListCell, DataListCheck, DataListItem } from '@patternfly/react-core';
 
 export interface ViewItem {
   id: string;
@@ -17,16 +16,15 @@ interface ListItemProps {
 }
 
 function ListItem(props: ListItemProps) {
-  const { viewItem, onSelect, selected = false } = props;
-  const doOnSelect = () => onSelect(viewItem.item);
+  const {viewItem, onSelect, selected = false} = props;
+  const doOnSelect = (sel) => onSelect(viewItem.item);
   return (
-    <Patternfly.ListViewItem
-      onClick={doOnSelect}
-      checkboxInput={(<input type="radio" checked={selected} value={viewItem.id} readOnly/>)}
-      leftContent={(<img className={'runtime-icon'} src={viewItem.icon}/>)}
-      heading={viewItem.name}
-      description={viewItem.description}
-    />
+    <DataListItem aria-labelledby="Selection item" isExpanded={false}>
+      <DataListCheck aria-labelledby="Selection item check" name="Selection item check" onChange={doOnSelect} isChecked={selected}/>
+      <DataListCell width={1}><img className={'runtime-icon'} src={viewItem.icon}/></DataListCell>
+      <DataListCell width={2}>{viewItem.name}</DataListCell>
+      <DataListCell width={3}>{viewItem.description}</DataListCell>
+    </DataListItem>
   );
 }
 
@@ -38,7 +36,7 @@ interface ListSingleSelectionProps<T> {
   children?: React.ReactNode;
 }
 
-function defaultMapToViewItem(item:any): ViewItem {
+function defaultMapToViewItem(item: any): ViewItem {
   return {
     ...item,
     item,
@@ -51,17 +49,20 @@ function ListSingleSelection<T>(props: ListSingleSelectionProps<T>) {
   return (
     <div className={'runtime-selector'}>
       <p>{children}</p>
-      <Patternfly.ListView>
+      <DataList aria-label="Selection">
         {
           items.map(mapToViewItem).map((viewItem, i) => (
-            <ListItem key={i} viewItem={viewItem} onSelect={onSelect}
-                         selected={selectedViewItem && selectedViewItem.id === viewItem.id}/>)
+            <ListItem
+              key={i}
+              viewItem={viewItem}
+              onSelect={onSelect}
+              selected={selectedViewItem && selectedViewItem.id === viewItem.id}
+            />)
           )
         }
-      </Patternfly.ListView>
+      </DataList>
     </div>
   );
 }
 
 export default ListSingleSelection;
-

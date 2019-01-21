@@ -11,7 +11,7 @@ interface NextStepsZipProps {
 }
 
 class NextStepsZip extends React.Component<NextStepsZipProps, {}> {
-  public render(){
+  public render() {
     return (
       <Modal title="Next steps..." isOpen={this.props.isOpen} onClose={this.props.onClose} actions={this.props.children} isLarge>
         {!this.props.error && (
@@ -21,7 +21,7 @@ class NextStepsZip extends React.Component<NextStepsZipProps, {}> {
             <p>
               You are ready to start working.
             </p>
-            <Button component="a" variant="link" href={this.props.downloadLink} target={'_blank'}>
+            <Button variant="link" href={this.props.downloadLink} target={'_blank'}>
               <DownloadIcon /> Download .zip
             </Button>
             <h2>Deploy it on OpenShift</h2>

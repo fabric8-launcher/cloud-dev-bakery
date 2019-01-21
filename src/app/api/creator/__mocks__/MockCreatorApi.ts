@@ -6,11 +6,11 @@ export class MockCreatorApi implements CreatorApi {
     const output: LaunchOutput = {
       id: `success`,
       events: [
-        { 'name': 'GITHUB_CREATE', 'message': 'Creating your new GitHub repository' },
-        { 'name': 'GITHUB_PUSHED', 'message': 'Pushing your customized Booster code into the repo' },
-        { 'name': 'OPENSHIFT_CREATE', 'message': 'Creating your project on OpenShift Online' },
-        { 'name': 'OPENSHIFT_PIPELINE', 'message': 'Setting up your build pipeline' },
-        { 'name': 'GITHUB_WEBHOOK', 'message': 'Configuring to trigger builds on Git pushes' }
+        {name: 'GITHUB_CREATE', message: 'Creating your new GitHub repository'},
+        {name: 'GITHUB_PUSHED', message: 'Pushing your customized Booster code into the repo'},
+        {name: 'OPENSHIFT_CREATE', message: 'Creating your project on OpenShift Online'},
+        {name: 'OPENSHIFT_PIPELINE', message: 'Setting up your build pipeline'},
+        {name: 'GITHUB_WEBHOOK', message: 'Configuring to trigger builds on Git pushes'}
       ]
     };
     return Promise.resolve(output)

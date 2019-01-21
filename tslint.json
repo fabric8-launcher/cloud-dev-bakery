@@ -1,11 +1,13 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-react"],
   "rules": {
     "max-classes-per-file": false,
     // Custom
     "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
     "interface-name": [false, "always-prefix"],
     "only-arrow-functions": false,
+    "arrow-parens": false,
+    "jsx-no-multiline-js": false,
     "member-ordering": [
       true,
       {

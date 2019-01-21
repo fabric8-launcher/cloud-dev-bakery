@@ -1,22 +1,22 @@
 const path = require('path');
 
 module.exports = {
-    propsParser: require('react-docgen-typescript').parse,
-    require: [path.join(__dirname, 'src/index.css')],
+    propsParser: require('react-docgen-typescript').withCustomConfig('./tsconfig.json', {}).parse,
+    require: [path.join(__dirname, 'node_modules/@patternfly/react-core/dist/styles/base.css')],
     getExampleFilename(componentPath) {
         return componentPath.replace(/\/([^\/]*)\.tsx?$/, '/__examples__/$1.md')
     },
-    webpackConfig: require('react-scripts-ts/config/webpack.config.dev'),
+    webpackConfig: require('react-scripts/config/webpack.config.js'),
     exampleMode: 'collapse',
     usageMode: 'collapse',
     pagePerSection: true,
     sections: [
         {
-            name: 'Generic Components',
+            name: 'generic-components',
             components: 'src/shared/components/**/*.tsx',
         },
         {
-            name: 'Wizard Components',
+            name: 'wizard-components',
             components: 'src/app/components/wizard/**/*.tsx',
         }
     ],

@@ -1,8 +1,8 @@
 import { requestsReducer } from 'redux-saga-requests';
 import { AppState } from '../states/index';
 import { createSelector } from 'reselect';
-import OpenShiftCluster from '../../models/OpenShiftCluster';
-import { FetchedData } from '../../models/FetchedData';
+import OpenShiftCluster from '@/app/models/OpenShiftCluster';
+import { FetchedData } from '@/app/models/FetchedData';
 import { FetchActions } from '../actions/fetchActions';
 
 // Reducer
@@ -10,7 +10,7 @@ import { FetchActions } from '../actions/fetchActions';
 export const clustersReducer = requestsReducer({
   actionType: FetchActions.FETCH_CLUSTERS,
   multiple: true,
-  getData: (state, action, config) => action.data.map(c => ({
+  getData: (state, action) => action.data.map(c => ({
     ...c.cluster,
     connected: c.connected,
   })),
@@ -18,7 +18,7 @@ export const clustersReducer = requestsReducer({
 
 // Selectors
 
-const getClustersState = (state:AppState) => state.clusters;
+const getClustersState = (state: AppState) => state.clusters;
 
 export const getClustersData = createSelector([getClustersState], (f) => ({
   data: f.data,

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import CapabilitiesSelection from './CapabilitiesSelection';
-import { StepProps } from '@shared/smart-components/smart-wizard/StepProps';
-import { FetchedData } from '@app/models/FetchedData';
-import Capability from '@app/models/Capability';
-import Wizard from '@shared/components/wizard';
+import { StepProps } from '@/shared/smart-components/smart-wizard/StepProps';
+import { FetchedData } from '@/app/models/FetchedData';
+import Capability from '@/app/models/Capability';
+import Wizard from '@/shared/components/wizard';
 
 export interface CapabilitiesStepContext {
   capabilities: Set<Capability>;

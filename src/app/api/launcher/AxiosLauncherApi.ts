@@ -1,7 +1,6 @@
 import { AxiosInstance } from 'axios';
-import { checkNotNull } from '@shared/utils/Preconditions';
+import { checkNotNull } from '@/shared/utils/Preconditions';
 import { LauncherApi, StatusListener, StatusMessage } from './LauncherApi';
-
 
 function createBackendWebsocketUrl(backendApiUrl?: string) {
   checkNotNull(backendApiUrl, 'backendApiUrl');
@@ -32,7 +31,7 @@ export default class AxiosLauncherApi implements LauncherApi {
         socket.close();
       } else {
         listener.onMessage(message);
-        if(message.statusMessage === events[events.length - 1].name) {
+        if (message.statusMessage === events[events.length - 1].name) {
           listener.onComplete();
           socket.close();
         }

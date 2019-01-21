@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import './Wizard.css';
+import './Wizard.scss';
 import classNames from 'classnames';
 import { Button, ButtonVariant } from '@patternfly/react-core';
 import { ArrowAltCircleRightIcon, CheckIcon } from '@patternfly/react-icons';
@@ -38,8 +38,8 @@ const WizardButton: React.StatelessComponent<WizardButtonProps> = ({ type, title
 interface WizardStepProps {
   title: string;
   completed?: boolean;
-  summary?:string;
-  selected?:boolean;
+  summary?: string;
+  selected?: boolean;
   locked?: boolean;
   children?: React.ReactNode;
   onClick?: () => void;
@@ -53,7 +53,7 @@ class WizardStep extends Component<WizardStepProps> {
     const linkOnClick = locked || !onClick ? () => {} : () => onClick();
     const completedAndNotLocked = !locked && completed;
     return (
-      <li className={classNames({'completed': completedAndNotLocked, selected, locked})}>
+      <li className={classNames({completed: completedAndNotLocked, selected, locked})}>
         <a href="#" onClick={linkOnClick}>{title}
           {(completedAndNotLocked || locked) && (
             <i className={classNames('ico fa', {'fa-check ico-green': completedAndNotLocked, 'fa-lock ico-muted': locked})}/>

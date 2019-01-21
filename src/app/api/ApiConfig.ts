@@ -1,6 +1,5 @@
-import { checkNotNull } from '@shared/utils/Preconditions';
+import { checkNotNull } from '@/shared/utils/Preconditions';
 import { KeycloakConfig } from './authentication/KeycloakAuthenticationApi';
-
 
 export const authenticationMode = checkNotNull(process.env.REACT_APP_AUTHENTICATION, 'process.env.REACT_APP_AUTHENTICATION');
 export const isKeycloakMode = authenticationMode === 'keycloak';

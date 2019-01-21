@@ -1,12 +1,12 @@
 import { AppState } from '../../../states';
-import DeploymentStep from '@app/components/wizard/steps/DeploymentStep';
+import DeploymentStep from '@/app/components/wizard/steps/DeploymentStep';
 import { getConnectedClustersData } from '../../../reducers/clustersReducer';
 import { connect } from 'react-redux';
 import { fetchActions } from '../../../actions/fetchActions';
 import { authenticationAction } from '../../../actions/authenticationActions';
 import { getAuthenticationState } from '../../../reducers/authenticationReducer';
 
-const mapStateToRuntimeStepProps = (state:AppState, props) => ({
+const mapStateToRuntimeStepProps = (state: AppState, props) => ({
   clustersData: getConnectedClustersData(state),
   authentication: {
     authenticationEnabled: getAuthenticationState(state).enabled,

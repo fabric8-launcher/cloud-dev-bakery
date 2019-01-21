@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 import { getToken } from '../reducers/authenticationReducer';
-import { Projectile } from '../../models/Projectile';
+import { Projectile } from '@/app/models/Projectile';
 import { authenticationAction } from '../actions/authenticationActions';
 import { launchActions, LaunchActions } from '../actions/launchActions';
 import { newCreatorApi, newLauncherApi } from '../../api';
@@ -25,21 +25,21 @@ function* submitWizard(action) {
     switch (target) {
       case 'zip':
         result = yield call(creatorApi.zip, {
-          name: projectile.name,
-          shared: { runtime: projectile.runtime },
+          name: projectile.name!,
+          shared: { runtime: projectile.runtime! },
           capabilities: (projectile.capabilities || []).map(c => ({ module: c.module })),
         }, { authorizationToken });
         yield put(launchActions.launchProjectileSuccess(result));
         break;
       case 'launch':
         result = yield call(creatorApi.launch, {
-          name: projectile.name,
+          name: projectile.name!,
           shared: { runtime: projectile.runtime! },
           capabilities: (projectile.capabilities || []).map(c => ({ module: c.module })),
-          clusterId: projectile.clusterId,
-          projectName: projectile.projectName,
-          gitOrganization: projectile.gitOrganization,
-          gitRepository: projectile.gitRepository,
+          clusterId: projectile.clusterId!,
+          projectName: projectile.projectName!,
+          gitOrganization: projectile.gitOrganization!,
+          gitRepository: projectile.gitRepository!,
         }, { authorizationToken });
         yield put(launchActions.launchProjectileFollowProgress(result));
         break;

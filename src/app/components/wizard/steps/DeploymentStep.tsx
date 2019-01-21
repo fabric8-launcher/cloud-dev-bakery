@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Component } from 'react';
 
-import Wizard from '@shared/components/wizard';
-import { StepProps } from '@shared/smart-components/smart-wizard/StepProps';
-import OpenShiftCluster from '@app/models/OpenShiftCluster';
-import SectionLoader from '@shared/components/loader/SectionLoader';
-import { FetchedData } from '@app/models/FetchedData';
+import Wizard from '@/shared/components/wizard';
+import { StepProps } from '@/shared/smart-components/smart-wizard/StepProps';
+import OpenShiftCluster from '@/app/models/OpenShiftCluster';
+import SectionLoader from '@/shared/components/loader/SectionLoader';
+import { FetchedData } from '@/app/models/FetchedData';
 import { Select, SelectOption } from '@patternfly/react-core';
 import { AuthorizationWarning } from '../../AuthorizationWarning';
-
 
 export interface DeploymentStepContext {
   cluster?: OpenShiftCluster;
@@ -20,6 +19,7 @@ export interface DeploymentStepProps extends StepProps<DeploymentStepContext> {
     authenticationEnabled: boolean;
     openAccountManagement(): void;
   };
+
   fetchClusters(): void;
 }
 
@@ -67,9 +67,11 @@ class DeploymentStep extends Component<DeploymentStepProps> {
             </Select>
           )}
           {clustersData.data.length === 0 && (
-            <AuthorizationWarning {...this.props.authentication}
-                                  name="OpenShift cluster"
-                                  retry={this.props.fetchClusters}/>
+            <AuthorizationWarning
+              {...this.props.authentication}
+              name="OpenShift cluster"
+              retry={this.props.fetchClusters}
+            />
           )}
         </SectionLoader>
         <Wizard.StepFooter>

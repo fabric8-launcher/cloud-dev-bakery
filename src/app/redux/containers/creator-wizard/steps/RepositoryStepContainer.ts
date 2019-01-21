@@ -1,12 +1,12 @@
 import { AppState } from '../../../states';
-import RepositoryStep from '@app/components/wizard/steps/RepositoryStep';
+import RepositoryStep from '@/app/components/wizard/steps/RepositoryStep';
 import { getGitUserData } from '../../../reducers/gitReducer';
 import { connect } from 'react-redux';
 import { fetchActions } from '../../../actions/fetchActions';
 import { authenticationAction } from '../../../actions/authenticationActions';
 import { getAuthenticationState } from '../../../reducers/authenticationReducer';
 
-const mapStateToRuntimeStepProps = (state:AppState, props) => ({
+const mapStateToRuntimeStepProps = (state: AppState, props) => ({
   applicationName: props.projectile.name,
   gitUserData: getGitUserData(state),
   authentication: {

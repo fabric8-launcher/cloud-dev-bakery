@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
-import Wizard from '@shared/components/wizard';
-import { StepProps } from '@shared/smart-components/smart-wizard/StepProps';
+import Wizard from '@/shared/components/wizard';
+import { StepProps } from '@/shared/smart-components/smart-wizard/StepProps';
 import { TextInput } from '@patternfly/react-core';
 import * as _ from 'lodash';
 
@@ -18,7 +18,7 @@ interface NameStepState {
 
 class NameStep extends Component<StepProps<NameStepContext>, NameStepState> {
   public static defaultProps = {
-    context: { name: '' },
+    context: {name: ''},
   };
 
   private updateStepContext = _.throttle((payload) => {
@@ -49,10 +49,11 @@ class NameStep extends Component<StepProps<NameStepContext>, NameStepState> {
         {...this.props.status}
       >
         <p>
-          <TextInput value={this.state.name}
-                     onChange={this.onNameChange}
-                     isValid={this.state.name.length === 0 || this.state.completed}
-                     aria-label="application-name"
+          <TextInput
+            value={this.state.name}
+            onChange={this.onNameChange}
+            isValid={this.state.name.length === 0 || this.state.completed}
+            aria-label="application-name"
           />
         </p>
         <Wizard.StepFooter>
@@ -64,16 +65,16 @@ class NameStep extends Component<StepProps<NameStepContext>, NameStepState> {
 
   private goToNextStep = () => {
     this.props.submit();
-  }
+  };
 
   private onNameChange = (name) => {
-    this.updateStepContext({context: { name }, completed: this.isNameValid(name) });
+    this.updateStepContext({context: {name}, completed: this.isNameValid(name)});
     this.setNameInState(name);
-  }
+  };
 
   private setNameInState = (name) => {
-    this.setState({ name, completed: this.isNameValid(name)});
-  }
+    this.setState({name, completed: this.isNameValid(name)});
+  };
 
   private isNameValid(name: string): boolean {
     return NAME_REGEXP.test(name);

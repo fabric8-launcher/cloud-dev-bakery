@@ -10,7 +10,6 @@ import { CreatorApi } from './creator/CreatorApi';
 import MockAuthenticationApi from './authentication/__mocks__/MockAuthenticationApi';
 import NoAuthenticationApi from './authentication/NoAuthenticationApi';
 
-
 export function newKeycloakAuthenticationApi() {
   switch (authenticationMode) {
     case 'no':

@@ -7,7 +7,7 @@ import { FetchActions } from '../actions/fetchActions';
 
 // Reducer
 
-export const capabilitiesReducer = requestsReducer({ actionType: FetchActions.FETCH_CAPABILITIES, multiple: true });
+export const capabilitiesReducer = requestsReducer({actionType: FetchActions.FETCH_CAPABILITIES, multiple: true});
 
 // Selectors
 
@@ -18,9 +18,9 @@ function createCapabilityFilterForRuntime(runtimeId?: string): (Capability) => b
   };
 }
 
-const getCapabilitiesState = (state:AppState) => state.capabilities;
+const getCapabilitiesState = (state: AppState) => state.capabilities;
 
-const getSelectedRuntimeId = (state:AppState, { selectedRuntime }) => selectedRuntime;
+const getSelectedRuntimeId = (state: AppState, {selectedRuntime}) => selectedRuntime;
 
 export const getCapabilitiesData = createSelector([getCapabilitiesState], (f) => ({
   data: f.data,

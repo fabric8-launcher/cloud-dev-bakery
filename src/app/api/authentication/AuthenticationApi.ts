@@ -1,9 +1,9 @@
-export class User {
-  public token: string;
-  public accountLink: object;
-  public userName: string;
-  public userPreferredName: string;
-  public sessionState: string;
+export interface User {
+  token: string;
+  accountLink: object;
+  userName: string;
+  userPreferredName: string;
+  sessionState: string;
 }
 
 export type OptionalUser = User | undefined;

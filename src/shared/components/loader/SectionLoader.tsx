@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import './SectionLoader.css';
+import './SectionLoader.scss';
 import paragraph from './short-paragraph.png';
 
 import { Alert, Button } from '@patternfly/react-core';
@@ -10,21 +10,23 @@ interface LoaderProps {
   loading: boolean;
   error?: string;
   children?: ReactNode;
+
   reload?(): void;
 }
 
 const SectionLoader = (props: LoaderProps) => (
   <div className="section-loader-wrapper">
     {!props.loading && props.error && (
-      <Alert variant="danger"
-             action={props.reload && (<Button variant="secondary" onClick={props.reload}><RebootingIcon />Retry</Button>)}
+      <Alert
+        variant="danger"
+        action={props.reload && (<Button variant="secondary" onClick={props.reload}><RebootingIcon/>Retry</Button>)}
       >
         Holy guacamole... something weird happened, please try again.
       </Alert>
     )}
     {props.loading && (
       <div className="section-loader">
-        <img src={paragraph} />
+        <img src={paragraph}/>
         <div className={'loader-inner'}>
           <div className="bar">
             <div className="circle"/>

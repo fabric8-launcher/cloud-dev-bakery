@@ -52,6 +52,6 @@ const launchReducer = (state: LaunchState = INITIAL_STATE, action) => {
 
 // Selectors
 
-export const getLaunchState = (state:AppState) => state.launch;
+export const getLaunchState = (state: AppState) => state.launch;
 
 export default launchReducer;

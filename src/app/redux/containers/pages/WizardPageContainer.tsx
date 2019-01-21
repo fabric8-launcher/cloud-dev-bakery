@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import MainLayoutContainer from '@app/redux/containers/MainLayoutContainer';
-import CreatorWizardContainer from '@app/redux/containers/creator-wizard/CreatorWizardContainer';
-import { AppState } from '@app/redux/states';
+import MainLayoutContainer from '@/app/redux/containers/MainLayoutContainer';
+import CreatorWizardContainer from '@/app/redux/containers/creator-wizard/CreatorWizardContainer';
 
-function WizardPage() {
+const WizardPage: React.FunctionComponent = () => {
   return (
     <MainLayoutContainer>
       <div className="container">
@@ -13,15 +11,6 @@ function WizardPage() {
       </div>
     </MainLayoutContainer>
   );
-}
+};
 
-const mapStateToProps = (state: AppState) => ({});
-
-const mapDispatchToProps = (dispatch) => ({});
-
-const WizardPageContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(WizardPage);
-
-export default WizardPageContainer;
+export default WizardPage;

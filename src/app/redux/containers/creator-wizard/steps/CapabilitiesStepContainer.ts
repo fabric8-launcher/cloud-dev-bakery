@@ -1,10 +1,10 @@
 import { AppState } from '../../../states';
 import { getCapabilitiesDataForSelectedRuntime } from '../../../reducers/capabilitiesReducer';
 import { connect } from 'react-redux';
-import CapabilitiesStep from '@app/components/wizard/steps/CapabilitiesStep';
+import CapabilitiesStep from '@/app/components/wizard/steps/CapabilitiesStep';
 import { fetchActions } from '../../../actions/fetchActions';
 
-const mapStateToRuntimeStepProps = (state:AppState, props) => ({
+const mapStateToRuntimeStepProps = (state: AppState, props) => ({
   capabilitiesData: getCapabilitiesDataForSelectedRuntime(state, { selectedRuntime: props.projectile.runtime}),
 });
 

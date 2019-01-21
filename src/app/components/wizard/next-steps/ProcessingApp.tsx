@@ -1,10 +1,7 @@
 import * as React from 'react';
 
-import * as Patternfly from 'patternfly-react';
-
-import { Modal } from '@patternfly/react-core';
-import SectionLoader from '@shared/components/loader/SectionLoader';
-
+import { DataList, DataListCell, DataListItem, Modal } from '@patternfly/react-core';
+import SectionLoader from '@/shared/components/loader/SectionLoader';
 
 interface EventStatus {
   statusMessage: string;
@@ -54,16 +51,19 @@ class ProcessingApp extends React.Component<ProcessingAppProps, {}> {
       };
     }
 
+    const ProgressEvent = ({event}) => (
+      <DataListItem aria-labelledby="Progress event" isExpanded={false}>
+        <DataListCell width={1}><StatusIcon status={event.status}/></DataListCell>
+        <DataListCell width={4}>{event.message}</DataListCell>
+      </DataListItem>
+    );
+
     return (
       <Modal isOpen={this.props.isOpen} onClose={this.props.onClose} title="Your application is getting created.." isLarge>
         <SectionLoader loading={!this.props.progressEvents}>
-          {progressSteps.map(s => (
-            <Patternfly.ListViewItem
-              key={s.id}
-              leftContent={(<StatusIcon status={s.status}/>)}
-              heading={s.message}
-            />
-          ))}
+          <DataList aria-label="Progress events">
+            {progressSteps.map(s => (<ProgressEvent key={s.id} event={s} />))}
+          </DataList>
         </SectionLoader>
       </Modal>
     );

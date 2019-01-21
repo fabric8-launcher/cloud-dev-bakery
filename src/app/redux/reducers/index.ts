@@ -18,6 +18,4 @@ const rootReducer = combineReducers<AppState>({
   launch: launchReducer,
 });
 
-
-
 export default rootReducer;

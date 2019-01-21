@@ -9,4 +9,3 @@ export interface Projectile {
   deploymentLink?: string;
   repositoryLink?: string;
 }
-

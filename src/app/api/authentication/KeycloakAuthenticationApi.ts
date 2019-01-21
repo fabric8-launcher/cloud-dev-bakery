@@ -1,21 +1,20 @@
 import * as jsSHA from 'jssha';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
-import * as Keycloak from 'keycloak-js';
-import { checkNotNull } from '@shared/utils/Preconditions';
+import Keycloak from 'keycloak-js';
+import { checkNotNull } from '@/shared/utils/Preconditions';
 import { AuthenticationApi, OptionalUser } from './AuthenticationApi';
 
-
-class StoredData {
-  public readonly token: string;
-  public readonly refreshToken?: string;
-  public readonly idToken?: string;
+interface StoredData {
+  token: string;
+  refreshToken?: string;
+  idToken?: string;
 }
 
-export class KeycloakConfig {
-  public clientId: string;
-  public realm: string;
-  public url: string;
+export interface KeycloakConfig {
+  clientId: string;
+  realm: string;
+  url: string;
 }
 
 export class KeycloakAuthenticationApi implements AuthenticationApi {
