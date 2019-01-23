@@ -48,7 +48,6 @@ const mapDispatchToProps = () => ({});
 const AppRouterContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-// @ts-ignore
 )(AppRouter);
 
 export default AppRouterContainer;

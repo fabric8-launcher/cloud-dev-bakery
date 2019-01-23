@@ -7,7 +7,6 @@ describe('<Wizard />', () => {
     const component = shallow(<Wizard><Wizard.Step title={'my first step'} selected={true} locked={false}/></Wizard>);
     expect(component).toMatchSnapshot();
   });
-
 });
 
 describe('<Wizard.Step />', () => {
