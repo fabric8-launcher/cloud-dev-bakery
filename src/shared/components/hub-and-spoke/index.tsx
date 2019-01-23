@@ -2,30 +2,34 @@ import * as React from 'react';
 import { Button, Grid, GridItem } from '@patternfly/react-core';
 
 import './hub-and-spoke.scss';
-import { EditIcon } from '@patternfly/react-icons';
-import { useContext, useState } from 'react';
+import { EditIcon, WindowCloseIcon } from '@patternfly/react-icons';
+import { ReactElement, useContext, useState } from 'react';
 
-interface HubEdition {
-  selected?: React.ReactNode;
-  open(comp: React.ReactNode);
+export interface HubItem {
+  title: string;
+  overview: {
+    component: ReactElement<any>;
+    width?: 'half' | 'full';
+  };
+  form: {
+    component: ReactElement<any>;
+  };
+}
+
+interface Hub {
+  selected?: HubItem;
+  open(item: HubItem);
   close();
 }
 
-const EditionContext = React.createContext<HubEdition | undefined>(undefined);
+const HubContext = React.createContext<Hub | undefined>(undefined);
 
-interface HubProps {
-  title: string;
-  edition: React.ReactNode;
-  width?: 'half' | 'full';
-  children: React.ReactNode;
-}
-
-export function Hub(props: HubProps) {
-  const hubEdition = useContext(EditionContext);
-  const size = props.width === 'full' ? 12 : 6;
+export function HubOverviewCard(props: HubItem) {
+  const hub = useContext(HubContext);
+  const size = props.overview.width === 'full' ? 12 : 6;
   const onEdit = () => {
-    if (hubEdition) {
-      hubEdition.open(props.edition);
+    if (hub) {
+      hub.open(props);
     }
   };
   return (
@@ -41,6 +45,37 @@ export function Hub(props: HubProps) {
         </div>
       </div>
       <div className="hub-and-spoke-body">
+        {props.overview.component}
+      </div>
+    </GridItem>
+  );
+}
+
+interface HubFormCardProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+function HubFormCard(props: HubFormCardProps) {
+  const hub = useContext(HubContext);
+  const onClose = () => {
+    if (hub) {
+      hub.close();
+    }
+  };
+  return (
+    <GridItem className="hub-and-spoke-item" span={12}>
+      <div className="hub-and-spoke-header">
+        <h1>
+          {props.title}
+        </h1>
+        <div className="hub-and-spoke-nav">
+          <Button variant="plain" aria-label="Edit" onClick={onClose}>
+            <WindowCloseIcon />
+          </Button>
+        </div>
+      </div>
+      <div className="hub-and-spoke-body">
         {props.children}
       </div>
     </GridItem>
@@ -48,32 +83,32 @@ export function Hub(props: HubProps) {
 }
 
 interface HubAndSpokeProps {
-  hubs: React.ReactNode[];
+  items: HubItem[];
 }
 
 export function HubAndSpoke(props: HubAndSpokeProps) {
 
-  const [selectedEdition, setSelectedEdition] = useState<React.ReactNode | undefined>(undefined);
+  const [selectedHub, setSelectedHub] = useState<HubItem | undefined>(undefined);
 
-  const editionContext = {
-    selected: selectedEdition,
-    open: (comp: React.ReactNode) => {
-      setSelectedEdition(comp);
+  const hub: Hub = {
+    selected: selectedHub,
+    open: (item: HubItem) => {
+      setSelectedHub(item);
     },
     close: () => {
-      setSelectedEdition(undefined);
+      setSelectedHub(undefined);
     },
   };
 
   return (
-    <EditionContext.Provider value={editionContext}>
+    <HubContext.Provider value={hub}>
       <Grid className="hub-and-spoke-container" gutter={'sm'}>
-        {selectedEdition ? (
-            <GridItem className="hub-and-spoke-edition" span={12}>
-              {selectedEdition}
-            </GridItem>
-        ) : props.hubs}
+        {hub.selected ? (
+            <HubFormCard title={hub.selected.title}>
+              {hub.selected.form.component}
+            </HubFormCard>
+        ) : props.items.map((item, i) => (<HubOverviewCard {...item} key={i} />))}
       </Grid>
-    </EditionContext.Provider>
+    </HubContext.Provider>
   );
 }
