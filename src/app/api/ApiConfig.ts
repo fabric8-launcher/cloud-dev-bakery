@@ -1,15 +1,24 @@
 import { checkNotNull } from '@/shared/utils/Preconditions';
 import { KeycloakConfig } from './authentication/KeycloakAuthenticationApi';
 
-export const authenticationMode = checkNotNull(process.env.REACT_APP_AUTHENTICATION, 'process.env.REACT_APP_AUTHENTICATION');
+
+function requireEnv(env: string | undefined, name: string): string {
+  const config = (window as any).GLOBAL_CONFIG;
+  if (config && config[name]) {
+    return config[name];
+  }
+  return checkNotNull(env, `process.env.${name}`);
+}
+
+export const authenticationMode = requireEnv(process.env.REACT_APP_AUTHENTICATION, 'REACT_APP_AUTHENTICATION');
 export const isKeycloakMode = authenticationMode === 'keycloak';
 
-export const isMockApi = checkNotNull(process.env.REACT_APP_API, 'process.env.REACT_APP_API') === 'mock';
+export const isMockApi = requireEnv(process.env.REACT_APP_API, 'REACT_APP_API') === 'mock';
 
 export const keycloakConfig: KeycloakConfig | undefined = isKeycloakMode ? {
-  clientId: checkNotNull(process.env.REACT_APP_KEYCLOAK_CLIENT_ID, 'process.env.REACT_APP_KEYCLOAK_CLIENT_ID'),
-  realm: checkNotNull(process.env.REACT_APP_KEYCLOAK_REALM, 'process.env.REACT_APP_KEYCLOAK_REALM'),
-  url: checkNotNull(process.env.REACT_APP_KEYCLOAK_URL, 'process.env.REACT_APP_KEYCLOAK_URL'),
+  clientId: requireEnv(process.env.REACT_APP_KEYCLOAK_CLIENT_ID, 'REACT_APP_KEYCLOAK_CLIENT_ID'),
+  realm: requireEnv(process.env.REACT_APP_KEYCLOAK_REALM, 'REACT_APP_KEYCLOAK_REALM'),
+  url: requireEnv(process.env.REACT_APP_KEYCLOAK_URL, 'REACT_APP_KEYCLOAK_URL'),
 }: undefined;
 
 export const creatorApiUrl =

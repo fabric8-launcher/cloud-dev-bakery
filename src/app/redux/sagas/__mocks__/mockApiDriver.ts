@@ -1,9 +1,9 @@
 import { createDriver } from 'redux-saga-requests-mock';
 
-import * as capabilities from '../../../api/creator/__mocks__/mock-capabilities.json';
-import * as runtimes from '../../../api/creator/__mocks__/mock-runtimes.json';
-import * as clusters from '../../../api/launcher/__mocks__/mock-clusters.json';
-import * as gitUser from '../../../api/launcher/__mocks__/mock-gitUser.json';
+import capabilities from '@/app/api/creator/__mocks__/mock-capabilities.json';
+import runtimes from '@/app/api/creator/__mocks__/mock-runtimes.json';
+import clusters from '@/app/api/launcher/__mocks__/mock-clusters.json';
+import gitUser from '@/app/api/launcher/__mocks__/mock-gitUser.json';
 import { FetchActions } from '../../actions/fetchActions';
 
 const toData = (content) => ({ data: content });

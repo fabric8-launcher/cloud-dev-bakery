@@ -2,6 +2,7 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { storiesOf } from '@storybook/react';
 import { HubAndSpoke, HubItem } from '../shared/components/hub-and-spoke';
+import Creator from '../app/Creator';
 
 const items: HubItem[] = [
   {
@@ -37,4 +38,9 @@ const items: HubItem[] = [
 storiesOf('HubAndSpoke', module)
   .add('simple', () => (
     <HubAndSpoke items={items}/>
+  ));
+
+storiesOf('Creator', module)
+  .add('simple', () => (
+    <Creator />
   ));

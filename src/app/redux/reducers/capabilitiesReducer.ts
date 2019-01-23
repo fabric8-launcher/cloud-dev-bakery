@@ -11,13 +11,6 @@ export const capabilitiesReducer = requestsReducer({actionType: FetchActions.FET
 
 // Selectors
 
-function createCapabilityFilterForRuntime(runtimeId?: string): (Capability) => boolean {
-  return (c) => {
-    // TODO add a way to filter capabilities by runtime
-    return true;
-  };
-}
-
 const getCapabilitiesState = (state: AppState) => state.capabilities;
 
 const getSelectedRuntimeId = (state: AppState, {selectedRuntime}) => selectedRuntime;
@@ -29,7 +22,7 @@ export const getCapabilitiesData = createSelector([getCapabilitiesState], (f) =>
 } as FetchedData<Capability[]>));
 
 export const getCapabilitiesDataForSelectedRuntime = createSelector([getCapabilitiesData, getSelectedRuntimeId], (c, r) => ({
-  data: c.data.filter(createCapabilityFilterForRuntime(r)),
+  data: c.data,
   loading: c.loading,
   error: c.error,
 } as FetchedData<Capability[]>));
